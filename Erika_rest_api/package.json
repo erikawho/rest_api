@@ -1,40 +1,32 @@
 {
-  "name": "erika_rest_api",
+  "name": "Erika_rest_api",
   "version": "1.0.0",
-  "description": "##To Submit this Assignment   * fork this repository   * write all of your code in a folder containing your name   * push to your repository   * submit a pull request to this repository   * submit a link to your PR in canvas",
+  "description": "Adding Angular to two resource REST API.",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/erikawho/rest_api.git"
-  },
-  "author": "Erika Hokanson",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/erikawho/rest_api/issues"
-  },
-  "homepage": "https://github.com/erikawho/rest_api#readme",
-  "devDependencies": {
+  "dependencies": {
     "angular": "^1.5.0",
+    "bcrypt": "^0.8.5",
     "body-parser": "^1.14.2",
     "chai": "^3.4.1",
     "chai-http": "^1.0.0",
+    "gulp-mocha": "^2.2.0",
+    "jsonwebtoken": "^5.5.4",
+    "mongoose": "^4.3.6",
     "eslint": "^1.10.3",
     "express": "^4.13.4",
-    "gulp": "^3.9.0",
+    "validator": "^4.5.2",
     "gulp-eslint": "^1.1.1",
-    "gulp-mocha": "^2.2.0",
-    "mocha": "^2.3.4",
-    "mongoose": "^4.3.6",
+    "gulp": "^3.9.0",
     "webpack-stream": "^3.1.0"
   },
-  "dependencies": {
-    "bcrypt": "^0.8.5",
-    "express": "^4.13.4",
-    "gulp-nodemon": "^2.0.6",
-    "jsonwebtoken": "^5.5.4",
-    "validator": "^4.5.2"
-  }
+  "devDependencies": {
+    "mocha": "^2.3.4"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

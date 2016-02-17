@@ -3,31 +3,36 @@
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
 const mocha = require('gulp-mocha');
-// const nodemon = require('gulp-nodemon');
+const webpack = require('webpack-stream');
 
-const scripts = ['server.js', 'gulpfile.js', './lib/*.js', './test/*.js'];
-
-gulp.task('lint', () => {
-  return gulp.src(scripts)
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
-});
+// const scripts = ['**/.js', '!node_modules/**'];
 
 gulp.task('test', () => {
   return gulp.src('test/*.js')
     .pipe(mocha({ reporter: 'nyan' }));
 });
 
-// gulp.task('watch', () => {
-//   return gulp.watch(scripts, ['lint', 'test']);
-// });
+gulp.task('html:dev', () => {
+  gulp.src(__dirname + '/app/**/*.html')
+    .pipe(gulp.dest(__dirname + '/build'));
+});
 
-// gulp.task('start', () => {
-//   nodemon({
-//     script: 'server.js',
-//     ext: 'html js'
-//   });
-// });
+gulp.task('webpack:dev', () => {
+  gulp.src(__dirname + '/app/js/*.js')
+    .pipe(webpack({
+      output: {
+        filename: 'bundle.js'
+      }
+    }))
+    .pipe(gulp.dest('build/'));
+});
 
-gulp.task('default', [/*'watch',*/ 'lint', 'test'/*, 'start'*/]);
+gulp.task('lint', () => {
+  return gulp.src(__dirname + '/app/js/*.js')
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
+gulp.task('build:dev', ['webpack:dev', 'html:dev']);
+gulp.task('default', ['build:dev', 'lint']);

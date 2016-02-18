@@ -33,13 +33,13 @@
 	<section data-ng-controller="humanController">
 		<h1>All Humans</h1>
 		<ul>
-			<li data-ng-repeat='donor in donors'> {{donor.username}} at {{donor.organisation}} - Donor ID: {{donor._id}}, Email: {{donor.authentication.email}}
-        <button data-ng-click='donor.editing = !donor.editing'>Update Donor</button>
-				<button data-ng-click='deleteDonor(donor)'>Delete Donor</button>
-				<form data-ng-if='donor.editing' data-ng-submit='updateDonor(donor)'>
-					<input data-ng-model='donor.name' type='text' placeholder='Username'/>
-					<input data-ng-model='donor.fitnessLevel' type='text' placeholder='Organisation'/>
-					<input data-ng-model='donor.dogPreference' type='text' placeholder='Email'/>
+			<li data-ng-repeat='human in humans'> {{human.name}} at {{human.fitnessLevel}} - Human ID: {{human._id}}, Email: {{human.authentication.email}}
+        <button data-ng-click='human.editing = !human.editing'>Update Human</button>
+				<button data-ng-click='deleteHuman(human)'>Delete Human</button>
+				<form data-ng-if='human.editing' data-ng-submit='updateHuman(human)'>
+					<input data-ng-model='human.name' type='text' placeholder='Username'/>
+					<input data-ng-model='human.fitnessLevel' type='text' placeholder='Fitness Level'/>
+					<input data-ng-model='human.email' type='text' placeholder='Email'/>
 					<button type='submit'>Update</button>
 				</form>
 			</li>
@@ -48,9 +48,9 @@
 		<h2>New Humans</h2>
 		<p>Sign up to walk a doggy</p>
 		<form data-ng-submit='createHuman(human)'>
-			<input data-ng-model='donor.username' type='text' placeholder='Username'/>
-			<input data-ng-model='donor.email' type='text' placeholder='Email'/>
-			<input data-ng-model='donor.password' type='text' placeholder='Password'/>
+			<input data-ng-model='human.name' type='text' placeholder='Username'/>
+			<input data-ng-model='human.email' type='text' placeholder='Email'/>
+			<input data-ng-model='human.password' type='text' placeholder='Password'/>
 			<button type='submit'>Sign Up!</button>
 		</form>
 	</section>

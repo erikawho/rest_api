@@ -1,6 +1,6 @@
 'use strict';
 
-const Dog = require(__dirname + '/../models/dog');
+const Human = require(__dirname + '/../models/human');
 const jwt = require('jsonwebtoken');
 
 module.exports = exports = (req, res, next) => {
@@ -9,11 +9,11 @@ module.exports = exports = (req, res, next) => {
     decoded =
       jwt.verify(req.headers.token, process.env.APP_SECRET || 'changethis');
   } catch (e) {
-    return res.status(401).json({ msg: 'could not authenticat dog' });
+    return res.status(401).json({ msg: 'could not authenticat human' });
   }
-  if (!decoded) res.status(401).json({ msg: 'could not authenticat dog' });
+  if (!decoded) res.status(401).json({ msg: 'could not authenticat human' });
 
-  Dog.findOne({ _id: decoded._id }, (err, user) => {
+  Human.findOne({ _id: decoded._id }, (err, user) => {
     if (err) {
       console.log(err);
       res.status(500).json({ msg: 'DB error' });

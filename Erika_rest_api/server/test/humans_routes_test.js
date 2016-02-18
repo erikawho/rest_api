@@ -47,7 +47,7 @@ describe('human API', () => {
 
     describe('tests that require a human in db', () => {
       beforeEach((done) => {
-        Human.create({ name: 'test human' }, (err, data) => {
+        Human.create({ authentication: { email: 'test@example.com', password: 'foobar123' } }, (err, data) => {
           if (err) return console.log(err);
           this.testHuman = data;
           done();

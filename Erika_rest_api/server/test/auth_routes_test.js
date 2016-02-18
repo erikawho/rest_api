@@ -40,19 +40,19 @@ describe('auth routes', () => {
 
   describe('tests that require a user in the DB', () => {
     beforeEach((done) => {
-      const newDog = new Dog();
+      const newHuman = new Human();
 
-      newDog.username = 'test@example.com';
-      newDog.authentication.email = 'test@example.com';
-      newDog.hashPassword('foobar123');
-      newDog.save((err) => {
+      newHuman.username = 'test@example.com';
+      newHuman.authentication.email = 'test@example.com';
+      newHuman.hashPassword('foobar123');
+      newHuman.save((err) => {
         if (err) return console.log(err);
         done();
       });
     });
 
     afterEach((done) => {
-      Dog.remove({}, () => {
+      Human.remove({}, () => {
         done();
       });
     });

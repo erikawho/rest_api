@@ -9,24 +9,13 @@ var dogSchema = new mongoose.Schema({
   favoriteToy: String,
   fixed: Boolean,
   age: Number,
-  kibblePreference: { type: String, default: 'fish' },
-  authentication: {
-    email: { type: String, required: true },
-    password: { type: String, required: true }
-  }
+  kibblePreference: { type: String, default: 'fish' }
 });
 
-dogSchema.methods.hashPassword = function(password) {
-  var hash = this.authentication.password = bcrypt.hashSync(password, 8);
-  return hash;
-};
+var Dog = mongoose.model('Dog', dogSchema);
 
-dogSchema.methods.comparePassword = function(password) {
-  return bcrypt.compareSync(password, this.authentication.password);
-};
-
-dogSchema.methods.generateToken = function() {
-  return jwt.sign({id: this._id}, process.env.APP_SECRET || 'changethis');
-};
+Dog.schema.path('kibblePreference').validate(function(value) {
+  return /fish|chicken|beef|mixed/i.test(value);
+}, 'Unavailable kibble match');
 
 module.exports = exports = mongoose.model('Dog', dogSchema);

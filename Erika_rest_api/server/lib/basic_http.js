@@ -21,5 +21,5 @@ module.exports = exports = (req, res, next) => {
 } catch (e) {
   console.log(e);
 }
-  res.status(401).json({ msg: 'could not authenticat dog' });
+  res.status(401).json({ msg: 'could not authenticat human' });
 };

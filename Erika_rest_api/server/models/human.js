@@ -5,13 +5,24 @@ const mongoose = require('mongoose');
 var humanSchema = new mongoose.Schema({
   name: String,
   fitnessLevel: Number,
-  dogPreference: { type: String, default: 'Akita' }
+  dogPreference: { type: String, default: 'Akita' },
+  authentication: {
+    email: { type: String, required: true },
+    password: { type: String, required: true }
+  }
 });
 
-var Human = mongoose.model('Human', humanSchema);
+humanSchema.methods.hashPassword = function(password) {
+  var hash = this.authentication.password = bcrypt.hashSync(password, 8);
+  return hash;
+};
 
-Human.schema.path('dogPreference').validate(function(value) {
-  return /Akita|Corgi|Terrier|Lab/i.test(value);
-}, 'Unavailable dog match');
+humanSchema.methods.comparePassword = function(password) {
+  return bcrypt.compareSync(password, this.authentication.password);
+};
+
+humanSchema.methods.generateToken = function() {
+  return jwt.sign({id: this._id}, process.env.APP_SECRET || 'changethis');
+};
 
 module.exports = exports = mongoose.model('Human', humanSchema);

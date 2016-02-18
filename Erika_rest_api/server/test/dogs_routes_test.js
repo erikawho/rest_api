@@ -47,7 +47,7 @@ describe('dog API', () => {
 
     describe('tests that require a dog in db', () => {
       beforeEach((done) => {
-        Dog.create({ authentication: { email: 'test@example.com', password: 'foobar123' } }, (err, data) => {
+        Dog.create({ name: 'test dog' }, (err, data) => {
           if (err) return console.log(err);
           this.testDog = data;
           done();

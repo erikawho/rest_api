@@ -1,7 +1,7 @@
 var angular = require('angular');
 
 describe('resource service', () => {
-  beforeEach(angular.mock.module('bearsApp'));
+  beforeEach(angular.mock.module('wapApp'));
 
   var $httpBackend;
   var Resource;

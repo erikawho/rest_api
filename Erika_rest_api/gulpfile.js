@@ -27,6 +27,16 @@ gulp.task('webpack:dev', () => {
     .pipe(gulp.dest('build/'));
 });
 
+gulp.task('webpack:test', () => {
+  gulp.src(__dirname + '/test/test_entry.js')
+    .pipe(webpack({
+      output: {
+        filename: 'test_bundle.js'
+      }
+    }))
+    .pipe(gulp.dest('test/'));
+});
+
 gulp.task('lint', () => {
   return gulp.src(__dirname + '/app/js/*.js')
     .pipe(eslint())

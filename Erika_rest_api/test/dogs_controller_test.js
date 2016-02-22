@@ -16,15 +16,15 @@ describe('dog controller', () => {
 
   it('should be able to make a controller', () => {
     var dogController = $ControllerConstructor('dogController', { $scope });
-    expect(typeof dogsController).toBe('object');
+    expect(typeof dogController).toBe('object');
     expect(Array.isArray($scope.dog)).toBe(true);
-    // expect(typeof $scope.getAll).toBe('function');
+    expect(typeof $scope.alldogs).toBe('function');
   });
 
   describe('REST requests', () => {
     beforeEach(angular.mock.inject(function(_$httpBackend_) {
       $httpBackend = _$httpBackend_;
-      $ControllerConstructor('DogController', { $scope });
+      $ControllerConstructor('dogController', { $scope });
     }));
 
     afterEach(() => {
@@ -34,7 +34,7 @@ describe('dog controller', () => {
 
     it('should make a get request to /api/dog', () => {
       $httpBackend.expectGET('http://localhost:3000/api/dog').respond(200, [{ name: 'test dog' }]);
-      $scope.getAll();
+      $scope.alldogs();
       $httpBackend.flush();
       expect($scope.dog.length).toBe(1);
       expect($scope.dog[0].name).toBe('test dog');

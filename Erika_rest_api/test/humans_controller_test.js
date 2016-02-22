@@ -15,16 +15,16 @@ describe('human controller', () => {
   }));
 
   it('should be able to make a controller', () => {
-    var humanController = $ControllerConstructor('HumanController', { $scope });
+    var humanController = $ControllerConstructor('humanController', { $scope });
     expect(typeof humanController).toBe('object');
     expect(Array.isArray($scope.human)).toBe(true);
-    expect(typeof $scope.getAll).toBe('function');
+    expect(typeof $scope.allhumans).toBe('function');
   });
 
   describe('REST requests', () => {
     beforeEach(angular.mock.inject(function(_$httpBackend_) {
       $httpBackend = _$httpBackend_;
-      $ControllerConstructor('HumanController', { $scope });
+      $ControllerConstructor('humanController', { $scope });
     }));
 
     afterEach(() => {
@@ -34,7 +34,7 @@ describe('human controller', () => {
 
     it('should make a get request to /api/human', () => {
       $httpBackend.expectGET('http://localhost:3000/api/human').respond(200, [{ name: 'test human' }]);
-      $scope.getAll();
+      $scope.allhumans();
       $httpBackend.flush();
       expect($scope.human.length).toBe(1);
       expect($scope.human[0].name).toBe('test human');

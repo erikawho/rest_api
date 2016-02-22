@@ -4,7 +4,7 @@ const angular = require('angular');
 
 const wapApp = angular.module('wapApp', []);
 
-wapApp.controller('dogController', ['$scope', '$http', ($scope, $http) => {
+wapApp.controller('dogController', ['$scope', '$http', function($scope, $http) {
   $scope.dog = [];
 
   $http.get('http://localhost:3000/api/alldogs')
@@ -49,7 +49,7 @@ wapApp.controller('dogController', ['$scope', '$http', ($scope, $http) => {
   };
 }]);
 
-wapApp.controller('humanController', ['$scope', '$http', ($scope, $http) => {
+wapApp.controller('humanController', ['$scope', '$http', function($scope, $http) {
   $scope.human = [];
 
   $http.get('http://localhost:3000/api/allhumans')

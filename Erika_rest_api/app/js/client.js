@@ -3,17 +3,21 @@
 const angular = require('angular');
 
 const wapApp = angular.module('wapApp', []);
+require('./services/resource_service')(wapApp);
+require('./services/cf_store')(wapApp);
 
-wapApp.controller('dogController', ['$scope', '$http', function($scope, $http) {
+wapApp.controller('dogController', ['$scope', function($scope) {
+}]);
+
+wapApp.controller('dogController', ['$scope', '$http', 'cfResource', function($scope, $http, Resource) {
   $scope.dog = [];
+  var dogService = Resource('/dog');
 
-$scope.alldogs = () => {
-  $http.get('http://localhost:3000/api/alldogs')
-    .then((res) => {
-      console.log('success getting all dogs!');
-      $scope.dog = res.data;
-    }, (err) => {
-      console.log(err);
+
+$scope.alldogs = function() {
+  dogService.alldogs(function(err, res) {
+      if (err) return console.log(err);
+      $scope.dog = res;
     });
   };
 

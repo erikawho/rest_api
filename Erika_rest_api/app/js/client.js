@@ -7,6 +7,7 @@ const wapApp = angular.module('wapApp', []);
 wapApp.controller('dogController', ['$scope', '$http', function($scope, $http) {
   $scope.dog = [];
 
+$scope.alldogs = () => {
   $http.get('http://localhost:3000/api/alldogs')
     .then((res) => {
       console.log('success getting all dogs!');
@@ -14,6 +15,7 @@ wapApp.controller('dogController', ['$scope', '$http', function($scope, $http) {
     }, (err) => {
       console.log(err);
     });
+  };
 
   $scope.createDog = (dog) => {
     $http.post('http://localhost:3000/api/dog', dog)
@@ -52,13 +54,15 @@ wapApp.controller('dogController', ['$scope', '$http', function($scope, $http) {
 wapApp.controller('humanController', ['$scope', '$http', function($scope, $http) {
   $scope.human = [];
 
-  $http.get('http://localhost:3000/api/allhumans')
-    .then((res) => {
-      console.log('success getting all humans!');
-      $scope.human = res.data;
-    }, (err) => {
-      console.log(err);
-    });
+  $scope.allhumans = () => {
+    $http.get('http://localhost:3000/api/allhumans')
+      .then((res) => {
+        console.log('success getting all humans!');
+        $scope.human = res.data;
+      }, (err) => {
+        console.log(err);
+      });
+    };
 
   $scope.createHuman = (human) => {
     $http.post('http://localhost:3000/api/human', human)
